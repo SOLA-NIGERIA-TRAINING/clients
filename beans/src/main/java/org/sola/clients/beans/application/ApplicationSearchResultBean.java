@@ -47,8 +47,7 @@ public class ApplicationSearchResultBean extends ApplicationSummaryBean {
     private String serviceStatusList;
     
     private String parcel;
-    private String section;
-   
+    
     public ApplicationSearchResultBean(){
         super();
     }
@@ -61,15 +60,6 @@ public class ApplicationSearchResultBean extends ApplicationSummaryBean {
         this.parcel = parcel;
     }
 
-    public String getSection() {
-        return section;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
-    }
-    
-    
     
     public String getAgent() {
         return agent;
