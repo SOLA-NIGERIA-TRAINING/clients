@@ -47,8 +47,8 @@ public class ApplicationSearchResultBean extends ApplicationSummaryBean {
     private boolean checked;
     private String serviceStatusList;
     private String parcel;
-
-    public ApplicationSearchResultBean() {
+    
+    public ApplicationSearchResultBean(){
         super();
     }
 
@@ -60,6 +60,7 @@ public class ApplicationSearchResultBean extends ApplicationSummaryBean {
         this.parcel = parcel;
     }
 
+    
     public String getAgent() {
         return agent;
     }
