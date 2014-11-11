@@ -581,6 +581,51 @@ public class ReportManager {
             return null;
         }
     }
+    
+      /**
+     * Generates and displays <b>Systematic registration Public display
+     * report</b>.
+     *
+     * @param signingList List Parcel list bean containing data for the
+     * report.
+     *
+     */
+    public static JasperPrint getSysRegSigningListReport(SigningListListBean signingList, String location, String subReport) {
+        HashMap inputParameters = new HashMap();
+        String upiCode = signingList.getSigningList().get(0).getNameLastpart();
+        location = location.substring(location.indexOf("/")+1);
+        String tmpLocation =  location.substring(location.indexOf("/")+1);
+        String lga = location.replace("/"+tmpLocation, " Lga");
+        String section = tmpLocation.substring(tmpLocation.indexOf("/")+1);
+        String ward = tmpLocation.replace("/"+section, ", ");
+        location = "Section "+section+", Ward "+ward+lga+" ( "+upiCode+" )";
+        
+//	Date currentdate = new Date(System.currentTimeMillis());
+//        inputParameters.put("CURRENT_DATE", currentdate);
+        inputParameters.put("REPORT_LOCALE", Locale.getDefault());
+        inputParameters.put("USER", SecurityBean.getCurrentUser().getFullUserName());
+        inputParameters.put("LOCATION", location);
+        inputParameters.put("MINISTRY_LOGO", ReportManager.class.getResourceAsStream(logoImage));
+        
+        SigningListListBean[] beans = new SigningListListBean[1];
+        beans[0] = signingList;
+        JRDataSource jds = new JRBeanArrayDataSource(beans);
+        
+        String pdReport = null;
+        pdReport = "/reports/SysRegSigningList.jasper"; 
+      
+        
+        try {
+            return JasperFillManager.fillReport(
+                    ReportManager.class.getResourceAsStream(pdReport),
+                    inputParameters, jds);
+        } catch (JRException ex) {
+            MessageUtility.displayMessage(ClientMessage.REPORT_GENERATION_FAILED,
+                    new Object[]{ex.getLocalizedMessage()});
+            return null;
+        }
+    }
+
 
     /**
      * Generates and displays <b>Systematic registration Certificates
