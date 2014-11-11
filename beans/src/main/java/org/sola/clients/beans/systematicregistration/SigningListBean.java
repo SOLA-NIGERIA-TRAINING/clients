@@ -28,7 +28,7 @@ public class SigningListBean extends AbstractIdBean {
     public static final String NAME_FIRSTPART_PROPERTY = "nameFirstpart";
     public static final String NAME_LASTPART_PROPERTY = "nameLastpart";
     public static final String PARCEL_PROPERTY = "parcel";
-    public static final String PERSONS_PROPERTY = "percons";
+    public static final String PERSONS_PROPERTY = "persons";
     
     private String nameFirstpart;
     private String nameLastpart;

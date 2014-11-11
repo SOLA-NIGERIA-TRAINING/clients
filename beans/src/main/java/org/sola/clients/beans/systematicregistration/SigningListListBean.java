@@ -69,10 +69,11 @@ public class SigningListListBean extends AbstractBindingBean {
 
         List<SysRegSigningListTO> sysRegListingTO =
                 WSManager.getInstance().getAdministrative().getSysRegSigningList(params);
-
         TypeConverters.TransferObjectListToBeanList(sysRegListingTO,
                 SigningListBean.class, (List) parcels);
     }
+    
+    
     
      /**
      * Withdraws application

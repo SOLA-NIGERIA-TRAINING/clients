@@ -593,7 +593,8 @@ public class ReportManager {
     public static JasperPrint getSysRegSigningListReport(SigningListListBean signingList, String location, String subReport) {
         HashMap inputParameters = new HashMap();
         String upiCode = signingList.getSigningList().get(0).getNameLastpart();
-        location = location.substring(location.indexOf("/")+1);
+        Integer i = signingList.getSigningList().size();
+        location = upiCode.substring(upiCode.indexOf("/")+1);
         String tmpLocation =  location.substring(location.indexOf("/")+1);
         String lga = location.replace("/"+tmpLocation, " Lga");
         String section = tmpLocation.substring(tmpLocation.indexOf("/")+1);
@@ -606,9 +607,15 @@ public class ReportManager {
         inputParameters.put("USER", SecurityBean.getCurrentUser().getFullUserName());
         inputParameters.put("LOCATION", location);
         inputParameters.put("MINISTRY_LOGO", ReportManager.class.getResourceAsStream(logoImage));
+        inputParameters.put("STATE", getPrefix ());
+        inputParameters.put("LGA", lga.replace("Lga", ""));
+        inputParameters.put("WARD", ward);
+        inputParameters.put("SECTION", section);
+        inputParameters.put("RECORDS", i);
         
         SigningListListBean[] beans = new SigningListListBean[1];
         beans[0] = signingList;
+        System.out.println("SIGNING LIST "+signingList.getSigningList().get(0).getParcel());
         JRDataSource jds = new JRBeanArrayDataSource(beans);
         
         String pdReport = null;

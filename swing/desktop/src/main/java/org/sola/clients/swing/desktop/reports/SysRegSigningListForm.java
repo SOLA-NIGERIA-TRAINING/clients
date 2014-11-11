@@ -130,8 +130,8 @@ public class SysRegSigningListForm extends javax.swing.JDialog {
         Date   recDate  = new Date ();
         String reportdate = formatter.format(recDate);
         
-        this.document.setTypeCode("publicNotification");
-//        this.document.setTypeCode("signingList");
+//        this.document.setTypeCode("publicNotification");
+        this.document.setTypeCode("signingList");
         this.document.setReferenceNr(tmpLocation);
         this.document.setRecordation(recDate);
 //        this.document.setExpirationDate(expDate);
@@ -262,16 +262,19 @@ public class SysRegSigningListForm extends javax.swing.JDialog {
 
             if (this.report.contentEquals("signingList")) {
                 signingListListBean.passParameter(tmpLocation);
+                
+                System.out.println("SIGNING LIST IN THE FORM  "+signingListListBean.getSigningList().get(0).getParcel());
+                
                 if (signingListListBean.getSigningList().isEmpty()) {
                     MessageUtility.displayMessage(ClientMessage.NO_REPORT_GENERATION);
                     return;
                 } else {
-//                    List<ValidationResultBean> result = null;
-//                    result = signingListListBean.publicDisplay(tmpLocation);
-//                    String message = MessageUtility.getLocalizedMessage(
-//                            ClientMessage.REPORT_GENERATION_SUCCESS,
-//                            new String[]{signingListListBean.getSigningList().get(0).getNameLastpart()}).getMessage();
-//                    openValidationResultForm(result, true, message);
+                    List<ValidationResultBean> result = null;
+                    result = signingListListBean.publicDisplay(tmpLocation);
+                    String message = MessageUtility.getLocalizedMessage(
+                            ClientMessage.REPORT_GENERATION_SUCCESS,
+                            new String[]{signingListListBean.getSigningList().get(0).getNameLastpart()}).getMessage();
+                    openValidationResultForm(result, true, message);
 
                     final String finalRequested = reportRequested;
                     SolaTask t = new SolaTask<Void, Void>() {
