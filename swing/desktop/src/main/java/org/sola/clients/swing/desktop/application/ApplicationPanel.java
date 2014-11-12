@@ -241,7 +241,6 @@ public class ApplicationPanel extends ContentPanel {
 //    ----------------------------
         this.btnCalculateFee.setVisible(false);
         this.txtNationality.setVisible(false);
-        this.txtState.setVisible(false);
         tabbedControlMain.removeTabAt(tabbedControlMain.indexOfComponent(feesPanel));
 //    --------------------            
         appBean.getSourceFilteredList().addObservableListListener(new ObservableListListener() {
@@ -343,11 +342,7 @@ System.out.println("QUI 6");
             tabbedControlMain.addTab(bundle.getString("ApplicationPanel.validationPanel.TabConstraints.tabTitle"), validationPanel);
             tabbedControlMain.addTab(bundle.getString("ApplicationPanel.historyPanel.TabConstraints.tabTitle"), historyPanel);
             btnValidate.setEnabled(true);
-            for (int i = 0, n = this.cbxState.getItemCount(); i < n; i++) {
-                if (this.cbxState.getItemAt(i).toString().contains(this.txtState.getText())) {
-                    this.cbxState.setSelectedIndex(i);
-                }
-            }
+            
         } else {
             cbxAgents.requestFocus(true);
             cbxAgents.setSelectedIndex(-1);
@@ -355,8 +350,6 @@ System.out.println("QUI 6");
             tabbedControlMain.removeTabAt(tabbedControlMain.indexOfComponent(validationPanel));
             btnValidate.setEnabled(false);
             this.cbxNationality.setSelectedIndex(168);
-            this.cbxState.setSelectedIndex(0); 
-            this.txtState.setText(this.cbxState.getItemAt(0).toString());
         }
 
         menuApprove.setEnabled(appBean.canApprove()
@@ -1049,7 +1042,6 @@ System.out.println("QUI 6");
         landUseTypeListBean1 = new org.sola.clients.beans.referencedata.LandUseTypeListBean();
         partyListBean1 = createPartyList();
         genderTypes = createGenderTypes();
-        stateTypes = new org.sola.clients.beans.referencedata.StateTypeListBean();
         pnlHeader = new org.sola.clients.swing.ui.HeaderPanel();
         jToolBar3 = new javax.swing.JToolBar();
         btnSave = new javax.swing.JButton();
@@ -1085,10 +1077,6 @@ System.out.println("QUI 6");
         lbNationality = new javax.swing.JLabel();
         cbxNationality = new javax.swing.JComboBox();
         txtNationality = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
-        txtState = new javax.swing.JTextField();
-        lbState = new javax.swing.JLabel();
-        cbxState = new javax.swing.JComboBox();
         jPanel20 = new javax.swing.JPanel();
         lblGender = new javax.swing.JLabel();
         cbxGender = new javax.swing.JComboBox();
@@ -1728,53 +1716,6 @@ System.out.println("QUI 6");
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.setMaximumSize(new java.awt.Dimension(26, 51));
-        jPanel7.setName("jPanel7"); // NOI18N
-
-        txtState.setName(bundle.getString("ApplicationPanel.txtState.name")); // NOI18N
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, appBean, org.jdesktop.beansbinding.ELProperty.create("${contactPerson.state}"), txtState, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        lbState.setText(bundle.getString("ApplicationPanel.lbState.text")); // NOI18N
-        lbState.setName(bundle.getString("ApplicationPanel.lbState.name")); // NOI18N
-
-        cbxState.setName(bundle.getString("ApplicationPanel.cbxState.name")); // NOI18N
-
-        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${stateTypeList}");
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, stateTypes, eLProperty, cbxState);
-        bindingGroup.addBinding(jComboBoxBinding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, appBean, org.jdesktop.beansbinding.ELProperty.create("${contactPerson.stateType}"), cbxState, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
-        bindingGroup.addBinding(binding);
-
-        cbxState.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxStateActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cbxState, javax.swing.GroupLayout.Alignment.TRAILING, 0, 242, Short.MAX_VALUE)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lbState)
-                .addContainerGap())
-            .addComponent(txtState)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(lbState)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cbxState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         jPanel20.setName(bundle.getString("ApplicationPanel.jPanel20.name_1")); // NOI18N
 
         lblGender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/common/red_asterisk.gif"))); // NOI18N
@@ -1785,8 +1726,8 @@ System.out.println("QUI 6");
         cbxGender.setName(bundle.getString("ApplicationPanel.cbxGender.name")); // NOI18N
         cbxGender.setRenderer(new SimpleComboBoxRenderer("getDisplayValue"));
 
-        eLProperty = org.jdesktop.beansbinding.ELProperty.create("${genderTypeList}");
-        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, genderTypes, eLProperty, cbxGender);
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${genderTypeList}");
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, genderTypes, eLProperty, cbxGender);
         bindingGroup.addBinding(jComboBoxBinding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, appBean, org.jdesktop.beansbinding.ELProperty.create("${contactPerson.genderType}"), cbxGender, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
@@ -1904,26 +1845,21 @@ System.out.println("QUI 6");
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labPreferredWay)
-                            .addComponent(labEmail)))
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labPreferredWay)
+                    .addComponent(labEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxCommunicationWay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3360,21 +3296,6 @@ System.out.println("QUI 6");
       }
     }//GEN-LAST:event_cbxNationalityActionPerformed
 
-    private void cbxStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxStateActionPerformed
-        if (this.cbxState.getSelectedIndex()>= 0) {
-         if (appBean != null && !appBean.isNew()) {
-         if (evt.getModifiers()== 0) {   
-             for (int i = 0, n = this.cbxState.getItemCount(); i < n; i++) {
-                 if (this.cbxState.getItemAt(i).toString().contains(this.txtState.getText())) {
-                     this.cbxState.setSelectedIndex(i);
-                 }
-             }
-         }    
-        } 
-         this.txtState.setText(this.cbxState.getSelectedItem().toString());
-       }
-    }//GEN-LAST:event_cbxStateActionPerformed
-
     private void btnPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlanActionPerformed
         openSysRegCertParamsForm(appBean.getNr(), "parcelPlan");
     }//GEN-LAST:event_btnPlanActionPerformed
@@ -3941,7 +3862,6 @@ System.out.println("QUI 6");
     public javax.swing.JComboBox cbxGender;
     private javax.swing.JComboBox cbxNationality;
     private javax.swing.JCheckBox cbxPaid;
-    private javax.swing.JComboBox cbxState;
     private org.sola.clients.beans.referencedata.CommunicationTypeListBean communicationTypes;
     public javax.swing.JPanel contactPanel;
     public javax.swing.JPanel documentPanel;
@@ -3979,7 +3899,6 @@ System.out.println("QUI 6");
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -4012,7 +3931,6 @@ System.out.println("QUI 6");
     private org.sola.clients.beans.referencedata.LandUseTypeListBean landUseTypeListBean1;
     private javax.swing.JLabel lbDob;
     private javax.swing.JLabel lbNationality;
-    private javax.swing.JLabel lbState;
     private javax.swing.JLabel lblGender;
     public javax.swing.JPanel mapPanel;
     private javax.swing.JMenuItem menuAddService;
@@ -4044,7 +3962,6 @@ System.out.println("QUI 6");
     private javax.swing.JScrollPane scrollFeeDetails1;
     private javax.swing.JScrollPane scrollPropertyDetails;
     private javax.swing.JPanel servicesPanel;
-    private org.sola.clients.beans.referencedata.StateTypeListBean stateTypes;
     private org.sola.clients.swing.common.controls.JTableWithDefaultStyles tabActionLog;
     private org.sola.clients.swing.common.controls.JTableWithDefaultStyles tabFeeDetails;
     private org.sola.clients.swing.common.controls.JTableWithDefaultStyles tabPropertyDetails;
@@ -4068,7 +3985,6 @@ System.out.println("QUI 6");
     private javax.swing.JTextField txtLastPart;
     private javax.swing.JTextField txtNationality;
     public javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtState;
     private javax.swing.JTextField txtStatus;
     private javax.swing.JTextField txtValue;
     public javax.swing.JPanel validationPanel;
