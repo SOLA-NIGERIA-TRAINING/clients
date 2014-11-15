@@ -102,6 +102,18 @@ public class ApplicationBean extends ApplicationSummaryBean {
     private String assigneeId;
     private ApplicationStatusTypeBean statusBean;
     public boolean addedAgent = false;
+    private String section;
+   
+    
+    
+    
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
     
     
     /**

@@ -47,11 +47,20 @@ public class ApplicationSearchResultBean extends ApplicationSummaryBean {
     private boolean checked;
     private String serviceStatusList;
     private String parcel;
+    private String section;
     
     public ApplicationSearchResultBean(){
         super();
     }
 
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+    
     public String getParcel() {
         return parcel;
     }
