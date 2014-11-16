@@ -283,7 +283,7 @@ public class SysRegSigningListForm extends javax.swing.JDialog {
                         public Void doTask() {
                             setMessage(MessageUtility.getLocalizedMessageText(ClientMessage.PROGRESS_MSG_OPEN_REPORT));
 
-//                            showReport(ReportManager.getSysRegSigningListReport(signingListListBean, tmpLocation, finalRequested));
+                            showReport(ReportManager.getSysRegSigningListReport(signingListListBean, tmpLocation, finalRequested));
                             return null;
                         }
                     };
